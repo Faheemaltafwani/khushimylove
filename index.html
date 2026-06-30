@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khushi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2014;
+    --ink-soft:#564631;
+    --paper:#f6efe1;
+    --paper-deep:#ede2cc;
+    --dusk:#1b1a2b;
+    --dusk-soft:#272540;
+    --saffron:#c8842c;
+    --chinar:#9c3d34;
+    --mist:#8a93a8;
+    --cream-text:#ece4d3;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Lora', serif;
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  .display{font-family:'Cormorant Garamond', serif;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    background:radial-gradient(ellipse at 50% 20%, var(--dusk-soft), var(--dusk) 70%);
+    color:var(--cream-text);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    padding:2rem;
+  }
+  .hero .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    font-size:0.7rem;
+    color:var(--saffron);
+    opacity:0.85;
+    margin-bottom:1.5rem;
+  }
+  .hero h1{
+    font-size:clamp(3.5rem, 12vw, 7.5rem);
+    font-weight:500;
+    margin:0;
+    letter-spacing:0.01em;
+  }
+  .hero p.sub{
+    font-style:italic;
+    font-size:clamp(1.1rem, 2.5vw, 1.4rem);
+    color:var(--mist);
+    margin-top:1.2rem;
+    max-width:32ch;
+  }
+  .hero .range{
+    margin-top:3rem;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.15em;
+    color:var(--mist);
+  }
+  .scrolldown{
+    position:absolute;
+    bottom:2.5rem;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    color:var(--mist);
+    font-family:'JetBrains Mono', monospace;
+    animation:bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translateY(0);opacity:0.5;}50%{transform:translateY(8px);opacity:1;}}
+
+  .leaf{
+    position:absolute;
+    width:22px;
+    height:22px;
+    opacity:0.7;
+    pointer-events:none;
+  }
+  .leaf svg{width:100%;height:100%;}
+
+  /* ---------- DIVIDER ---------- */
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:1rem;
+    padding:3.5rem 1rem;
+    color:var(--chinar);
+  }
+  .divider .line{
+    height:1px;
+    width:64px;
+    background:linear-gradient(90deg, transparent, var(--ink-soft), transparent);
+    opacity:0.4;
+  }
+  .divider svg{width:18px;height:18px;}
+
+  /* ---------- ENTRY SECTIONS ---------- */
+  .entry{
+    max-width:660px;
+    margin:0 auto;
+    padding:1rem 1.5rem 4rem;
+  }
+  .entry .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--saffron);
+    margin-bottom:0.6rem;
+  }
+  .entry h2{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:clamp(1.9rem, 5vw, 2.6rem);
+    margin:0 0 1.6rem;
+    color:var(--chinar);
+  }
+  .entry p{
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    margin:0 0 1.15rem;
+  }
+  .entry p:first-of-type::first-letter{
+    font-family:'Cormorant Garamond', serif;
+    font-size:3.2rem;
+    font-weight:600;
+    float:left;
+    line-height:0.8;
+    padding-right:0.12em;
+    padding-top:0.1em;
+    color:var(--chinar);
+  }
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- SECTION BREAK (time passing) ---------- */
+  .timepass{
+    max-width:660px;
+    margin:0 auto;
+    padding:2rem 1.5rem 2rem;
+    text-align:center;
+    color:var(--ink-soft);
+    font-style:italic;
+    font-size:0.95rem;
+    opacity:0.75;
+  }
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    min-height:100vh;
+    background:radial-gradient(ellipse at 50% 80%, var(--dusk-soft), var(--dusk) 75%);
+    color:var(--cream-text);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:3rem 1.5rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .closing .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    font-size:0.7rem;
+    color:var(--saffron);
+    margin-bottom:1.6rem;
+  }
+  .closing h2{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(1.8rem, 4.5vw, 2.6rem);
+    max-width:22ch;
+    line-height:1.4;
+    margin:0 0 2rem;
+  }
+  .closing .signoff{
+    font-family:'Cormorant Garamond', serif;
+    font-size:clamp(2.6rem, 7vw, 4rem);
+    color:var(--saffron);
+    margin-top:1rem;
+  }
+  .closing .small{
+    margin-top:2.5rem;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.15em;
+    color:var(--mist);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">a letter, in pieces</div>
+  <h1 class="display">Khushi</h1>
+  <p class="sub">everything I never said out loud, written down instead</p>
+  <div class="range">7 MAY 2022 — 2026</div>
+  <div class="scrolldown">scroll ↓</div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="line"></div>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2C9 6 4 9 4 14a8 8 0 0016 0c0-5-5-8-8-12z"/><path d="M12 9v11"/></svg>
+  <div class="line"></div>
+</div>
+
+<!-- ENTRY: 7 MAY 2022 -->
+<section class="entry reveal">
+  <div class="eyebrow">7 May 2022 — where it started</div>
+  <h2 class="display">The first time I saw you</h2>
+  <p>The first time I saw you, I fell for you in that very instance. I felt like I'd have a long connection with you. I was an introvert when it came to girls, but with you, my words moved on their own. Something inside me pushed me to talk to you, to stare into your beautiful eyes, the way you moved them, those moles on your face. You felt like someone from another world. Not just your eyes — your voice, your hands, everything about you was different, something heavenly.</p>
+  <p>It started with a simple conversation, where you helped me with my chemistry paper, the one I'd missed and was going to write later that day. You came and told me the differences, the kind of questions that had been asked before. Helpful and big-hearted, you seemed to me — and of course, you were.</p>
+  <p>We both studied away from home, in the city. You were preparing for your medical entrance exam, I was preparing for engineering. After school ended I asked for your social media, and you said, "you can get my Snap id, if you want." We started talking, and within days it felt like we'd known each other for years. It made no sense to just be friends, so I asked you to be mine, and you said yes without a second thought. It was all so romantic, so beautiful.</p>
+</section>
+
+<div class="divider"><div class="line"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2C9 6 4 9 4 14a8 8 0 0016 0c0-5-5-8-8-12z"/><path d="M12 9v11"/></svg><div class="line"></div></div>
+
+<!-- ENTRY: THREE YEARS -->
+<section class="entry reveal">
+  <div class="eyebrow">the years between</div>
+  <h2 class="display">Three years</h2>
+  <p>Three years ago I met you, completely unexpectedly. Then we came to Srinagar together. It was all destiny — you became so friendly with me, even though we'd barely spoken. In the cab, when we talked — warna kisi ko mere hone ya na hone se koi farq nahi padta tha, except my family. You know my friends, the favours they made me do, and I know plenty of them would've wanted what we had — but you chose me, and I couldn't have asked Almighty for anything better.</p>
+  <p>But tumne bhi tou dhokhe mein rakha mujhe — bata dete tumhe ye sab lagta hai, main aisa nahi banta. Although that was never my intention — this was my love and care for you. I always thought we'd never separate, so let me be fully committed, all your debts mine to carry.</p>
+  <p>Khushi, I know during these years of happiness and charm, I used to dominate you, control you, even made you cry. I won't pretend that isn't true. I always thought we'd never separate — that I'd be fully committed to you, marry you one day — and I expected you to think the same. But I didn't know that for you it was just a normal relationship. For me it wasn't a relationship, it was a promise I made to you, and to my own soul. And I will always keep that promise — even though you don't believe my promises, this one you will see.</p>
+</section>
+
+<div class="divider"><div class="line"></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2C9 6 4 9 4 14a8 8 0 0016 0c0-5-5-8-8-12z"/><path d="M12 9v11"/></svg><div class="line"></div></div>
+
+<!-- ENTRY: FEB 2025 -->
+<section class="entry reveal">
+  <div class="eyebrow">February 2025 — the day it ended</div>
+  <h2 class="display">Our beautiful love story</h2>
+  <p>February 2025, the day it ended. At first I thought this quarrel was just a regular one, so I blocked you and hoped you'd try to reach me some other way. Maybe a text, the way it always worked when we fought before — we both knew it, checking the blocked messages. But this time you didn't try. And that made me think — she's moved on, so why am I still waiting, and for what. When you stay with someone long enough, you start expecting them to stay with you forever.</p>
+  <p>What felt like the best decision ever made, years ago, started to feel like a wrong step. I don't regret the decision I made, but going through things I could have avoided if I'd chosen differently — it becomes a heavy stone on your head. You try to keep yourself from thinking about it, but how much can a person hold back. Those memories aren't only in the mind, they sink down into the layers of the soul, and they find their way back up, again and again.</p>
+  <p>At last it felt like a dream coming to an end, and all I could do was make sure you didn't get hurt. It felt like a relief, almost, to see you happy without me. All I wanted was for you to live your life, free. I did bad things when we were together, and you forgave me for them — and I am so grateful for that. I'll always cherish the moments we spent together. You will always be my first, and only, love.</p>
+</section>
+
+<div class="timepass">— after that, I started writing to you again, even when I'd promised myself I wouldn't —</div>
+
+<!-- ENTRY: DAY ONE -->
+<section class="entry reveal">
+  <div class="eyebrow">day one</div>
+  <h2 class="display">The first time writing this down</h2>
+  <p>Today is the first time I've ever written something like this. Nobody will ever get to read it, but just the thought of being able to share everything puts my life at ease.</p>
+  <p>Khushi, I know that during these years of happiness I used to dominate you, control you, even made you cry. But tumne bhi tou dhokhe mein rakha mujhe — bata dete tumhe ye sab lagta hai, main aisa nahi banta. That was never the intention. It was my love and care for you, badly shown. I always thought we'd never separate. I expected you to think the same — but I know now that for you, it was just a normal relationship. For me, it was a promise I made to you and to my own soul. I will always keep it, even if you don't believe my promises. This one, you'll see.</p>
+</section>
+
+<!-- ENTRY: DAY TWO -->
+<section class="entry reveal">
+  <div class="eyebrow">day two</div>
+  <h2 class="display">The void</h2>
+  <p>Since the day you left, I feel a void growing inside me. The more I try to forget you, the more you come back to my thoughts. I used to think I was strong, that nothing could shake me like this — but two days in, I can already see where this is going. Maybe it was fate. But this time, fate was in our hands, and we just didn't choose to save us. It felt like I'd become such a weight in your life that you wanted rid of me as soon as you could. But we did love each other — even if we don't say it now. Whatever it was from you, I always loved you, and I will keep loving you my whole life.</p>
+  <p>I can hear you say my name in the morning, telling me to go to class — until I open my eyes and it's only a dream. Though we're apart, I can still feel your warmth, and I regret the decision to come home after my attempt in January. Maybe that distance was where all of this began.</p>
+  <p>One thing I always wanted to ask, but never did, because you'd never have been honest about it — Khushi, was there someone else? Or did you just lose interest? Before my exams you really wanted distance from me. Since the day you joined the library, it felt like I was forcing you to even talk to me. You told me a hundred times I was controlling — but you could have just told me straight. What were those kisses and hugs, then? But setting that aside — I cherished every moment with you. If I'd known you would leave, shayad main tumhare saath aur time bitata in saalon mein. But regrets don't change anything. What was going to happen, happened. I'm just trying to get over this. Milte hai kal — ab to poori zindagi hai tumse baatein karne ko.</p>
+</section>
+
+<!-- ENTRY: DAY THREE -->
+<section class="entry reveal">
+  <div class="eyebrow">day three</div>
+  <h2 class="display">Sorry, kal baat nahi ho paayi</h2>
+  <p>Sorry, kal baat nahi ho paayi — bas thoda thak chuka tha main, tou jaldi neend aa gayi. Baaki meri life mein ab shayad koi excitement rahi hi nahi. Feels like I'm in a prison, bas koi schedule follow kar raha hoon. Chalo jo bhi hai, but ab thoda sukoon mil raha hai ki kisi ki life mein kaanta nahi ban raha. Jo mujhe sochne par majboor karta hai — mujhe kya ho gaya tha jab maine tumhare saath itna zulm kiya?</p>
+  <p>But good things take time, and for you it might have taken three years for this good thing to happen, but eventually it did. You're free now — not under anyone's control or influence. Nobody disrespects you anymore, na hi koi padhai se door kar raha hai ab. Na koi video call karne ke liye force karta hai, na romance karne ke liye. Hope tumhe sukoon mila hoga ab meri gairmaujoodgi mein.</p>
+  <p>Abhi main college mein hoon, yahi 30-10 minute free mile the, tou aaj itna hi bol sakta hoon. Halaanki tune tou wo haal kar diya mera ki tere paas agar din bhar bhi free ho, you wouldn't even message me. Par, why am I complaining — after all, it was my mistake to expect these things, for you it was just a normal relationship, like others. Fir bhi koi baat nahi. Bye.</p>
+</section>
+
+<!-- ENTRY: DAY FOUR -->
+<section class="entry reveal">
+  <div class="eyebrow">day four</div>
+  <h2 class="display">Hello, kal shaam ke baad</h2>
+  <p>Hello, kal shaam ke baad — halaanki man nahi kiya tumse kabhi baat karne ka, lekin yaar yahi ek tareeka hai jis se mera man shaant hota hai. Aaj maine socha tha main tumhe yaad nahi karoonga chahe kuch bhi ho jaaye — lekin fir bhi har second mere dimaag mein bas tum hi thi.</p>
+  <p>I really miss you, but you also hurt me enough to be forgotten. I won't go against my parents — what was that, I mean, that was all you got. Ridiculous of you to even say that. You put water to every second of our relationship by saying that. What do you think, you're the only one with values and morals? My values sit above everything. But if they were compromised, it was only ever for you. And I was able to sacrifice them only for your love — but you didn't even care.</p>
+</section>
+
+<!-- ENTRY: I should let you go -->
+<section class="entry reveal">
+  <div class="eyebrow">an evening soon after</div>
+  <h2 class="display">I should let you go</h2>
+  <p>Hey baby, I hope you're fine. Sorry for the delay, I had an important conversation with someone and just wrapped it up.</p>
+  <p>Baby, you know what — today I've realised I should let you go. This time, forever. Don't be sad, but I think this is what's better for you. I don't want to be like an asshole hanging around your neck, irritating you, distracting you from your studies, threatening you. I want you to live your life and get as much success as you can. I know this is sad and emotional, but think about it — you living your life on your own terms, your own freedom, and when you become something, it'll add more flavour to it. So I hope you understand my decision, and stop thinking about me — which I know you already have. So baby, take care now. From today until my last day, I will never contact you or write to you again. Bye to my sweetheart, and the love of my life.</p>
+</section>
+
+<!-- ENTRY: your bhoot -->
+<section class="entry reveal">
+  <div class="eyebrow">it didn't last</div>
+  <h2 class="display">Hi babe, it's me — your bhoot</h2>
+  <p>Though I promised never to message again, I can't hold myself back. I tried to push away this thought — writing to you, hoping there might be just a slight spark in your heart that could bring us together again — but I can't. There were days we lived so happily together, not knowing what was written for us, and that was the beauty of those days. Maybe if we'd known, you wouldn't have chosen me — which, again, would've been better for you.</p>
+  <p>I keep thinking about myself — what kind of person am I. Why did I even come into your life. I wish that day we first saw each other never came at all. What a life you would have had — amazing, full of excitement, not bound under anyone's control. No fear of doing things secretly, no secrets at all. Whatever they were, the things you call mistakes that make me guilty even reacting to them — they shouldn't have happened at all. Now I'm realising what a mistake it was when I trusted you, didn't let anyone else into my head, ignored every warning, every piece of advice. But it had to happen, and it did — and it left me full of guilt and self-doubt. I'll cherish every moment we shared, but this — your deception, your lies — that will stay with me forever.</p>
+  <p>This is the last time I'll ever write to you, and I know you won't ever read this in my lifetime. I'm becoming that person again, spending time writing to someone I don't know anymore — or maybe I never did. But this is it.</p>
+</section>
+
+<div class="timepass">— months passed between this letter and the next —</div>
+
+<!-- ENTRY: August 2025 -->
+<section class="entry reveal">
+  <div class="eyebrow">August 2025 — where we separated</div>
+  <h2 class="display">I don't know where to start</h2>
+  <p>Khushi, I don't know where to start, but I think I should start from the truth. We separated in August last year, 2025. Since then our lives went in different directions, but somehow we still talk sometimes. And every time we do, you still make me feel good. You still have that effect on me — maybe that's why it hurts the most.</p>
+  <p>I know I was the one who made most of the mistakes. I accept that completely. I won't deny it, I won't hide from it. I know the things I did aren't forgettable, and maybe not even forgivable. Still, I ask for your forgiveness — not because I deserve it, but because I owe you that honesty. You made mistakes too. I know that. But today I want you to know — I've forgiven all of them. Every single one. I carry no anger, no resentment. Just memories, and love.</p>
+  <p>I miss you, Khushi. I miss you like nothing else in my life. You weren't just someone I loved — you were the most important person in my life. Losing you didn't just change my days, it changed me. I still remember the first time we met, 7th May 2022. I didn't plan it, didn't expect it, but that was the first time I fell for someone so deeply and so quickly. It scared me how fast it happened, but it also felt right. Too right.</p>
+  <p>I don't know what exactly went wrong. I think about it a lot. Somewhere in my heart I still believe we could have sorted it out, if you'd felt the same way, if we'd moved towards each other instead of away. I always waited for you to make a small move, just one step closer. I think if that had happened, I'd have fallen for you all over again. But with time I understood something painful — maybe I wasn't able to keep you happy. Maybe I wasn't the one meant for you. Maybe I wasn't deserving enough. That realisation hurts, but it's honest.</p>
+  <p>You deserve better. You always did. You're a great person, a strong personality, someone who brings light into people's lives — including mine, even now. Loving you made me a better person, even if I couldn't be the best one for you. No matter where life takes me, no matter what I achieve, you'll always be the only girl I truly fell for. I will always love you, till my last breath. That doesn't mean I expect anything from you — it just means my love for you doesn't depend on outcomes. This isn't a message to bring you back, and it's not to make you feel guilty. It's just me, being honest, maybe for the last time. You mattered to me more than I ever knew how to show. I hope you're happy. Truly. And I hope someone gives you everything I couldn't.</p>
+  <p style="text-align:right; font-style:italic;">— always, me</p>
+</section>
+
+<!-- ENTRY: birthday note -->
+<section class="entry reveal">
+  <div class="eyebrow">the birthday note</div>
+  <h2 class="display">An AI-written note</h2>
+  <p>Sorry to message you again. At this point I can't lie to you, or keep you in deception. But I really loved you, till your birthday wish — going through that note I was choking. How can a person so important to me, who claims I'm important to her, send an AI-written note. For the last year I didn't get a single note from you. You had one moment, and you still let it go. Even the "I love you" part wasn't a big deal for you. You tried to justify it. But I'm leaving it aside now. I don't want to remember it anymore. My love for you won't diminish, but I won't chase you anymore.</p>
+  <p>Tumhari ye baatein ki mujhe wo nahi karna, ye nahi karna — main force nahi karoonga tumhe apni stance badalne ke liye, aur ye baat bhi sach hai ki tum kabhi khud pe koi cheez force bhi nahi karoge, khaaskar mere liye. Aur yaar, main samajhta tha main tumhari highest priority tha, family ke baad — lekin mujhse zyada apki life mein important Madhu hogi, ye maine expect nahi kiya tha. Chalo main kya hi kar sakta hoon ab.</p>
+  <p>Ek baar yaad hai jab aapne kaha tha, "Faheem, mujhe tumhari zaroorat hai" — last November mein. Ab khud socho, kitni zaroorat thi aapko meri. Mujhe maaf karna agar main aapka time zyada kha raha hoon, lekin please mere baare mein ye sochna band karna ki shayad ye bekaar hai, din bhar baitha hai isiliye itne lambe notes bhejta rehta hai. Please ye sab mat sochna — I know it's not the same for you, which isn't a problem at all. Chalo lets leave it here, forever, Khushi.</p>
+</section>
+
+<!-- ENTRY: exam se pehle -->
+<section class="entry reveal">
+  <div class="eyebrow">before an exam</div>
+  <h2 class="display">Really sorry for this, yaar</h2>
+  <p>Khushi, sorry, really sorry. Ye sab jo hota hai na, exam se pehle, ab mujhe khud bhi nahi pata kyun ho raha hai — jaise hum koi na koi bahana dhoondte hain ladne ka. Khud dekho yaar, maine bola bhi tha tumhe ki be karaai nahin, knh, fir achanak jaise main poora badal gaya. Really sorry for this, yaar. I know ki tumhari koi galti nahi hai, and I am being honest about this.</p>
+  <p>I wanted to make everything right. Mai chhuy nai tse vunyuk taam returns manz kihin mongmut, na mangaii — aaz taam agar main tse satovuy na ya leke kajmey, tim chi wariya baji galti yi chu poz. Magar yus tse mai dhokhe ditith, apuz vonuth bei matlab yi tse karan chukh aukhit syod kath taaki kuni peth tuli yi thaf — khushi buri chu teli maiti lagaan. Tikyazi I never wanted to lose you. Magar Allah torum yi aaze samajh kath ki jab ladki sach mein bole ki jaana hai mujhe, use rokna nahi chahiye, because she has already left a long time ago.</p>
+  <p>Mera intezaar bahut keemti tha — bahut kuch seekha is se maine bhi, ki kis tarah ek insaan paane ke liye kuch bhi kar sakta hai, aur doosre ko khayal bhi nahi hota is baat ka. Chalo, Allah Hafiz yaar. Best of luck to you, and Arooja too — use zaroor bolna. Aaj ke baad main message nahi karoonga. Do forgive me, and aaj se assume me dead for you.</p>
+</section>
+
+<!-- ENTRY: Khushboo Hamid -->
+<section class="entry reveal">
+  <div class="eyebrow">the mosquito note</div>
+  <h2 class="display">Khushboo Hamid</h2>
+  <p>Hi Khushboo Hamid, is waqt main fir se tumhari life mein ek machhar ki tarah aa raha hoon, tumhe disturb karne ke liye — but please, ab sirf ek baar mujhe jhelo. Haan yaar, maine ki galtiyaan, tumhe gaaliyan deke, threats deke, maine bahut sataya tumhe. Har baar meri hi galti thi, main is cheez se kabhi nahi bhagoonga, never. Maine itni badi galtiyaan ki hain ki tumhari jagah koi aur hota tou kab ka chhod deta mujhe. Magar tumhari jagah koi aur hota tou main kabhi efforts bhi nahi daalta itne.</p>
+  <p>Jab tak hum theek the, aur uske baad jo sab maine aapke liye kiya, wo shayad hi koi kisi ke liye karega. Aur shayad agar aap nahi hote, koi aur hota, main kabhi nahi karta itna sab. Tumhara jo mujh pe qarza hai, main wo kabhi nahi utaar sakoonga — lekin jitni shiddat se mohabbat ki ja sakti thi, maine ki. Aur khaaskar mujhe fakhr hai is baat ka ki maine kabhi kisi aur ke influence mein tumhe nahi chhoda, jabki bahut baar mujhe kya kya sunna pada, bahut kuch sehna pada, ladkon se ladna pada — lekin tumhari character pe kabhi baat uthne nahi di.</p>
+  <p>Maine apse ek waada kiya tha — Khushi, I will love you in grey. Shayad yaad ho aapko. Main really meant that. Mujhe aapse koi materialistic cheez nahi chahiye thi, na kuch aur — bas aap chahiye the. Anyways, mujhe har ek galti ke liye maaf karna, aur mujhe bhool jaana, jo ki tum kabse bhoolna chahti thi. Aur mera waada hai — apni maa ke janaze ki kasam, aur apni jawani ki kasam — kabhi nahi aaoonga aapke peeche. Good bye.</p>
+</section>
+
+<!-- ENTRY: before your Sunday exam -->
+<section class="entry reveal">
+  <div class="eyebrow">before your sunday exam</div>
+  <h2 class="display">Apko azaadi chahiye, lo mil gayi</h2>
+  <p>Mujhe kuch baatein kehni thi aapse. I hope aap achhe se, bina jaldi ke, ye messages dekhoge, aur koi tension nahi loge. Ik aapka exam hai Sunday ko, aur mujhe nahi karni chahiye thi message abhi — but still, as your well-wisher, ik this message of mine will make you happy and relaxed.</p>
+  <p>Mujhe koi jhagda nahi karna aapse, ya koi threats ya gaaliyan nahi deni hain aapko. Mujhe bas ye bolna hai ki jo aapne kaha tha mujhe — that you will come find me — yaar, why will you do it? The thing is, I am the worst person you can get. Jisne aapko gaaliyan dein, threats diye, aapko maara, bahut kuch galat kiya. Shayad agar aapne mere bajaaye kisi aur ke saath rakhi hoti relation, ye sab nahi hota, aur shayad aapka rishta abhi bhi rehta, aur aap khush rehte.</p>
+  <p>Meri zindagi mein aap mere liye sabse badi jeet thi, halaanki main is layak nahi tha, but still, you never made me feel like that — or maybe you did, but I couldn't understand. Tum jiyo apni zindagi yaar, achhe se jiyo. Maine pichle kuch hafton se ye plan banaya tha ki SKAUST ya NEET ke din main fir se aaoonga — jab aap bahar niklogi, I will hold your hand, and ask for forgiveness again, aur aapko achhe se fir se propose karta. But now I have realised ki nahi hai ye sab theek. Mujhe ab samajh aa raha hai ki main tou yaar last year se aapko force hi kar raha hoon, hai na?</p>
+  <p>All I want to say is — Khushboo, nahi aaoonga main ab, nahi rahoonga aapki life mein, nahi sataoonga aapko. Aapko mujhse azaadi chahiye — lo, mil gayi aapko azaadi.</p>
+</section>
+
+<div class="timepass">— this was the last one —</div>
+
+<!-- ENTRY: the last one -->
+<section class="entry reveal">
+  <div class="eyebrow">the last one</div>
+  <h2 class="display">Every second I spent with you</h2>
+  <p>Hi Khushi. Sorry, yaar, is waqt aapko ye bhejne ke liye. Actually, sorry for everything, yaara — even for coming into your life. Ik maine sab kharab kar diya yaar, har koi cheez meri wajah se kharab hui. Maine kitna sataya tumhe — uski koi maafi hi nahi hai. Ye tumhara badappan tha ki tumne mujhe maaf kiya. Main tou tumhare pairon ki dhool ke barabar bhi nahi hoon ab yaar.</p>
+  <p>Lekin yaar, I have always loved you since the day we started talking, aur wo pyaar kabhi khatam nahi hua — khatam kya, kam bhi nahi hua. Shayad main kisi bhi situation ko handle nahi kar paaya — shayad isliye kyunki main tumhe kabhi khona nahi chahta tha. Magar mera bharosa karo, maine khud ko kho diya tha. Main khud se bhi bahut door chala gaya tha. Ye saare pal, ye ek saal, mere liye sau saalon ke barabar ban gaya hai, aur shayad isne mujhse har khushi cheen li. Mujhe tumhare siwa kuch nahi chahiye tha.</p>
+  <p>Mai apko kabhi deserve nahi karta tha. Mujhe maaf karna har cheez ke liye. Main koi mauka nahi maangoonga — bas mere dil mein bahut kuch tha is poore saal, shayad isi wajah se main aisa ban gaya tha. Lekin main aisa nahi hoon. I am better than this, inside.</p>
+  <p>Allah aapko khush rakhe, Khushboo, aur kamiyabi de. Yaar bitaya hua har ek second meri zindagi ke sabse khoobsurat second the. I am sorry. And best of luck for your future life. Allah Hafiz.</p>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="eyebrow">always, me</div>
+  <h2 class="display">You will always be my first, and only, love.</h2>
+  <div class="signoff display">Allah Hafiz, Khushi.</div>
+  <div class="small">7 MAY 2022 — FOREVER, IN MEMORY</div>
+</section>
+
+<script>
+  // scroll reveal
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.12});
+  items.forEach(i=>io.observe(i));
+
+  // drifting chinar leaves in hero
+  const hero = document.querySelector('.hero');
+  const leafPath = '<path d="M12 2C9 6 4 9 4 14a8 8 0 0016 0c0-5-5-8-8-12z" fill="currentColor" opacity="0.85"/><path d="M12 9v11" stroke="#1b1a2b" stroke-width="0.6"/>';
+  const colors = ['#c8842c','#9c3d34','#b96a2c'];
+  function spawnLeaf(){
+    const leaf = document.createElement('div');
+    leaf.className = 'leaf';
+    const startX = Math.random()*100;
+    const dur = 9 + Math.random()*7;
+    const drift = (Math.random()*120-60);
+    const rot = 180 + Math.random()*360;
+    const color = colors[Math.floor(Math.random()*colors.length)];
+    leaf.style.left = startX+'%';
+    leaf.style.top = '-30px';
+    leaf.style.color = color;
+    leaf.innerHTML = '<svg viewBox="0 0 24 24">'+leafPath+'</svg>';
+    leaf.animate([
+      {transform:`translate(0,0) rotate(0deg)`, opacity:0},
+      {transform:`translate(${drift*0.3}px, 30vh) rotate(${rot*0.4}deg)`, opacity:0.8, offset:0.15},
+      {transform:`translate(${drift}px, 110vh) rotate(${rot}deg)`, opacity:0}
+    ], {duration:dur*1000, easing:'ease-in'});
+    hero.appendChild(leaf);
+    setTimeout(()=>leaf.remove(), dur*1000);
+  }
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    for(let i=0;i<4;i++) setTimeout(spawnLeaf, i*1800);
+    setInterval(spawnLeaf, 2600);
+  }
+</script>
+
+</body>
+</html>
